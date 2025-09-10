@@ -1,15 +1,26 @@
+//attack speed vairable
 let bossAs;
+//Combat level variable
 let bossCb;
+//Examine text data variable
 let bossExamine;
+//monster size variable
 let bossSize;
+//monster name variable
 let bossName;
+//player for each card variable
 let player;
+//images for first card variable
 let currentImage = "";
+//images for second card variable
 let currentImage2 = "";
 
+
+//variable that sets the id when chosen for each monster in the dropdown
 var selectOne = document.getElementById("bossSelectOne");
 var selectTwo = document.getElementById("bossSelectTwo");
 console.log(selectOne);
+//setting my boss id's and images for each monster which were split on the comma 
 function createOptions() {
   var bosses = Object.keys(bossMap);
   bosses.forEach((boss) => {
@@ -24,6 +35,7 @@ function createOptions() {
     console.log(boss.replaceAll(" ", "") + ".png");
   });
 }
+//calling text values for each monsters ID when picked on dropdown
 createOptions();
 function updateBossCards() {
   if (player == 1) {
@@ -38,7 +50,7 @@ function updateBossCards() {
     setText("bossTwoExamine", bossExamine);
   }
 }
-
+//drop down menu one
 selectOne.addEventListener("change", function () {
   player = 1;
   var id = selectOne.value.split(",")[0];
@@ -47,7 +59,7 @@ selectOne.addEventListener("change", function () {
   getMonster(id);
   setImageURL("img1", image);
 });
-
+//drop down menu two
 selectTwo.addEventListener("change", function () {
   player = 2;
   var id = selectTwo.value.split(",")[0];
@@ -56,13 +68,13 @@ selectTwo.addEventListener("change", function () {
   getMonster(id);
   setImageURL("img2", image);
 });
-
+//pulls the id for monster selected 
 function getMonster(monsterId) {
   const requestOptions = {
     method: "GET",
     redirect: "follow",
   };
-
+// api data pulling 
   fetch(
     "https://corsproxy.io/?url=https://api.gearscape.net/api/monster/id/" +
       monsterId,
@@ -86,6 +98,8 @@ function getMonster(monsterId) {
     .catch((error) => console.error(error));
 }
 
+
+// AI STUFF 
 let botReply = "";
 
 let userInput = "";
@@ -135,4 +149,4 @@ function sendToBot() {
   });
 }
 
-//getMonster(5886)
+
