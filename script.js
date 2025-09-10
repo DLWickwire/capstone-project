@@ -1,0 +1,138 @@
+let bossAs;
+let bossCb;
+let bossExamine;
+let bossSize;
+let bossName;
+let player;
+let currentImage = "";
+let currentImage2 = "";
+
+var selectOne = document.getElementById("bossSelectOne");
+var selectTwo = document.getElementById("bossSelectTwo");
+console.log(selectOne);
+function createOptions() {
+  var bosses = Object.keys(bossMap);
+  bosses.forEach((boss) => {
+    var option = document.createElement("option");
+    var option2 = document.createElement("option");
+    option.textContent = boss;
+    option2.textContent = boss;
+    option.value = bossMap[boss] + "," + boss.replaceAll(" ", "") + ".png";
+    option2.value = bossMap[boss] + "," + boss.replaceAll(" ", "") + ".png";
+    selectOne.appendChild(option);
+    selectTwo.appendChild(option2);
+    console.log(boss.replaceAll(" ", "") + ".png");
+  });
+}
+createOptions();
+function updateBossCards() {
+  if (player == 1) {
+    setText("bossOneAs", bossAs);
+    setText("bossOneSize", bossSize);
+    setText("bossOneCb", bossCb);
+    setText("bossOneExamine", bossExamine);
+  } else {
+    setText("bossTwoAs", bossAs);
+    setText("bossTwoSize", bossSize);
+    setText("bossTwoCb", bossCb);
+    setText("bossTwoExamine", bossExamine);
+  }
+}
+
+selectOne.addEventListener("change", function () {
+  player = 1;
+  var id = selectOne.value.split(",")[0];
+  var image = "images/" + selectOne.value.split(",")[1];
+  console.log(image);
+  getMonster(id);
+  setImageURL("img1", image);
+});
+
+selectTwo.addEventListener("change", function () {
+  player = 2;
+  var id = selectTwo.value.split(",")[0];
+  var image = "images/" + selectTwo.value.split(",")[1];
+  console.log(image);
+  getMonster(id);
+  setImageURL("img2", image);
+});
+
+function getMonster(monsterId) {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://corsproxy.io/?url=https://api.gearscape.net/api/monster/id/" +
+      monsterId,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result.monster.name);
+      console.log(result.monster.level_cb);
+      console.log(result.monster.size);
+      console.log(result.monster.examine);
+      console.log(result.monster.attack_speed);
+
+      bossName = result.monster.name;
+      bossCb = result.monster.level_cb;
+      bossSize = result.monster.size;
+      bossExamine = result.monster.examine;
+      bossAs = result.monster.attack_speed;
+      updateBossCards();
+    })
+    .catch((error) => console.error(error));
+}
+
+let botReply = "";
+
+let userInput = "";
+
+onEvent("fightButton", "click", function () {
+  userInput = getValue("userInput");
+  if (userInput) {
+    console.log(userInput);
+    setText("chatResponse", "Thinking...");
+    setText("errorCode", "");
+    //sendToBot();
+  } else {
+    console.log("under else: " + userInput);
+    setText("errorCode", "You didnt pick enough bosses");
+  }
+});
+
+function sendToBot() {
+  console.log("sent to bot");
+  async function query(data) {
+    const response = await fetch(
+      "https://router.huggingface.co/v1/chat/completions",
+      {
+        headers: {
+          Authorization: `Bearer ${HF_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    const result = await response.json();
+    return result;
+  }
+
+  query({
+    messages: [
+      {
+        role: "user",
+        content: userInput + " respond in 50 words or less",
+      },
+    ],
+    model: "deepseek-ai/DeepSeek-V3.1:fireworks-ai",
+  }).then((response) => {
+    let botReply = response.choices[0].message.content;
+    setText("chatResponse", botReply);
+  });
+}
+
+//getMonster(5886)
