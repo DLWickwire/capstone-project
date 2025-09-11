@@ -22,7 +22,9 @@ var selectTwo = document.getElementById("bossSelectTwo");
 console.log(selectOne);
 //setting my boss id's and images for each monster which were split on the comma 
 function createOptions() {
+  //creates Array
   var bosses = Object.keys(bossMap);
+  //Loops
   bosses.forEach((boss) => {
     var option = document.createElement("option");
     var option2 = document.createElement("option");
@@ -30,6 +32,7 @@ function createOptions() {
     option2.textContent = boss;
     option.value = bossMap[boss] + "," + boss.replaceAll(" ", "") + ".png";
     option2.value = bossMap[boss] + "," + boss.replaceAll(" ", "") + ".png";
+    //Creates html element from js
     selectOne.appendChild(option);
     selectTwo.appendChild(option2);
     console.log(boss.replaceAll(" ", "") + ".png");
@@ -108,7 +111,7 @@ onEvent("fightButton", "click", function () {
   userInput = getValue("userInput");
   if (userInput) {
     console.log(userInput);
-    setText("chatResponse", "Thinking...");
+    setText("chatResponse", "Diving into Gilenor lore...");
     setText("errorCode", "");
     //sendToBot();
   } else {
@@ -139,7 +142,7 @@ function sendToBot() {
     messages: [
       {
         role: "user",
-        content: userInput + " respond in 50 words or less",
+        content: " respond in 100 words or less on which Oldschool Runescape boss would win 1 on 1 and why out of " +player1+ " and " +player2
       },
     ],
     model: "deepseek-ai/DeepSeek-V3.1:fireworks-ai",

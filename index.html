@@ -9,89 +9,94 @@
       rel="stylesheet"
     />
   </head>
-<!--Header-->
+  <!--Header-->
 
   <body class="bg bg-dark">
     <div class="container mt-4 bg-success">
       <h1 class="text-light text-center card bg-dark m-4">RuneBattles</h1>
-
-<!--First card-->
-      <div class="card bg-primary float-start" style="width: 18rem">
-        <div class="text-center">
-          <img
-            id="img1"
-            src="images/AbyssalSire.png"
-            class="card-img-top"
-            style="width: 150px"
-            alt="Image of runescape boss"
-          />
+      <div class="d-flex justify-content-between">
+        <!--First card-->
+        <div class="card bg-primary float-start" style="width: 18rem">
+          <div style="height: 400px"class="text-center flex-column d-flex justify-content-center align-items-center">
+            <img
+              id="img1"
+              src="images/AbyssalSire.png"
+              class="card-img-top"
+              style="width: 150px"
+              alt="Image of runescape boss"
+            />
+          </div>
+          <div class="card-body">
+            <div>
+              <label>
+                <select
+                  class="form-select"
+                  id="bossSelectOne"
+                  aria-labelledby="Select boss 1"
+                >
+                  <option value="0,images/r.png" selected>Select A boss</option>
+                </select></label
+              >
+            </div>
+            <p style="height: 70px"class="card-text bg-white overflow-auto p-2"><span id="bossOneExamine"></span></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Combat Level: <span id="bossOneCb"></span>
+            </li>
+            <li class="list-group-item">
+              Size: <span id="bossOneSize"></span>
+            </li>
+            <li class="list-group-item">
+              Attack Speed: <span id="bossOneAs"></span>
+            </li>
+          </ul>
+          <div class="card-body"></div>
         </div>
-        <div class="card-body">
-          <div>
+
+        <!--AI SLOP BOT RESPONSE BS-->
+        <div id="aiSlop" class="card bg-warning" >
+          <p id="chatResponse" style="max-width: 400px"></p>
+          
+        </div>
+        <!--Card two-->
+
+        <div class="card bg-danger float-end" style="width: 18rem">
+          <div style="height: 400px" class="text-center flex-column d-flex justify-content-center align-items-center">
+            <img
+              id="img2"
+              src="images/dusk.png"
+              class="card-img-top"
+              style="width: 150px"
+              alt="Image of runescape boss"
+            />
+          </div>
+          <div class="card-body">
             <label>
               <select
                 class="form-select"
-                id="bossSelectOne"
-                aria-labelledby="Select boss 1"
+                id="bossSelectTwo"
+                aria-labelledby="Select Boss 2"
               >
-                <option value="" selected>Select A boss</option>
+                <option value="1,images/s.png" selected>Select A boss</option>
               </select></label
             >
+            <p style="height: 70px"class="card-text bg-white overflow-auto p-2"><span id="bossTwoExamine"> </span></p>
           </div>
-          <p class="card-text"><span id="bossOneExamine"></span></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Combat Level:<span id="bossTwoCb"> </span>
+            </li>
+            <li class="list-group-item">Size:<span id="bossTwoSize"></span></li>
+            <li class="list-group-item">
+              Attack Speed:<span id="bossTwoAs"> </span>
+            </li>
+          </ul>
+          <div class="card-body"></div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            Combat Level: <span id="bossOneCb"></span>
-          </li>
-          <li class="list-group-item">Size: <span id="bossOneSize"></span></li>
-          <li class="list-group-item">
-            Attack Speed: <span id="bossOneAs"></span>
-          </li>
-        </ul>
-        <div class="card-body"></div>
       </div>
 
-<!--AI SLOP BOT RESPONSE BS-->
-
-<!--Card two-->
-
-      <div class="card bg-danger float-end" style="width: 18rem">
-        <div class="text-center">
-          <img
-            id="img2"
-            src="images/dusk.png"
-            class="card-img-top"
-            style="width: 150px"
-            alt="Image of runescape boss"
-          />
-        </div>
-        <div class="card-body">
-          <label>
-            <select
-              class="form-select"
-              id="bossSelectTwo"
-              aria-labelledby="Select Boss 2"
-            >
-              <option value="" selected>Select A boss</option>
-            </select></label
-          >
-          <p class="card-text"><span id="bossTwoExamine"> </span></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            Combat Level:<span id="bossTwoCb"> </span>
-          </li>
-          <li class="list-group-item">Size:<span id="bossTwoSize"></span></li>
-          <li class="list-group-item">
-            Attack Speed:<span id="bossTwoAs"> </span>
-          </li>
-        </ul>
-        <div class="card-body"></div>
-      </div>
-
-  
-<!--Footer-->
+      <!--Footer-->
 
       <div class="card text-center bg-dark fixed-bottom">
         <div class="card-body">
