@@ -116,15 +116,20 @@ onEvent("fightButton", "click", function () {
   // gets the boss names from the dropdowns
   let player1 = selectOne.options[selectOne.selectedIndex].textContent;
   let player2 = selectTwo.options[selectTwo.selectedIndex].textContent;
-
+//checks to see if both players chose a boss from dropdowns
   if (player1 && player2) {
     console.log("Player 1: " + player1 + " | Player 2: " + player2);
     setText("chatResponse", "Diving into the world of Gielinor...");
     //sendToBot(player1, player2);
+    sendToBotTest();
   } else {
     console.log("Boss not selected");
   }
 });
+
+function sendToBotTest(player1, player2){
+  setText("chatResponse", "Dagannoth Rex would defeat the Doom of Moktaiol. Rex is one of the Dagannoth Kings, a powerful trio designed to require specific combat styles. He is only vulnerable to melee attacks, making him highly resistant to the Doom's powerful Ranged and Magic-based attacks. The Doom of Moktaiol has no effective way to damage Rex, whose high defensive bonuses would negate its offensive capabilities. In a direct confrontation, Rex could simply outlast the Doom, landing consistent melee hits until it prevails.");
+}
 
 function sendToBot(player1, player2) {
   console.log("sent to bot");
@@ -149,12 +154,13 @@ function sendToBot(player1, player2) {
     messages: [
       {
         role: "user",
-        content: `Respond in 100 words or less on which Oldschool Runescape boss would win 1 on 1 and why out of ${player1} and ${player2}.`,
+        content: `Respond in 150 words or less on which Oldschool Runescape boss would win 1 on 1 and why out of ${player1} and ${player2}.`,
       },
     ],
     model: "deepseek-ai/DeepSeek-V3.1:fireworks-ai",
   }).then((response) => {
     botReply = response.choices[0].message.content;
     setText("chatResponse", botReply);
+    setStyle("chatResponse", "max-width:70%")
   });
 }

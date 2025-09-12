@@ -1,0 +1,17 @@
+    @font-face {
+  font-family: myFirstFont;
+  src: url(runescape.ttf);
+}
+
+.myText {
+  font-family: myFirstFont;
+  color: yellow;
+  font-size: larger;
+}
+h1{
+    font-family: myFirstFont
+}
+
+p{
+    font-family: myFirstFont
+}
